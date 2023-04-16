@@ -1,0 +1,63 @@
+{% extends 'main.html' %}
+    {% load static %}
+    {% block content %}
+    <div class="cart-box-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    {% for order in orders %}
+                    <div style="border: 1px solid rgb(175, 175, 175); border-radius: 1px;" class="table-main table-responsiv">
+                        <p>Order Id: {{order.id}}</p>
+                        <h5>Completed Date: {{order.date}}</h5>
+                        <h5>Total Price: ${{order.total_price}}</h5>
+                        {% if order.delivered %}
+                            <p style="color: rgb(4, 240, 4);">Delivered</p>
+                        {% else %}
+                            <h4 style="color: rgb(0, 189, 0);">Not Yet Delivered</h4>
+                        {% endif %}
+                        <table class="table">
+                            <thead style="background-color: antiquewhite; color: black;">
+                                <tr>
+                                    <th>Images</th>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in order.item_set.all %}
+                                <tr id="{{item.product.id}}">
+                                    <td class="thumbnail-img">
+                                        <a href="#">
+									<img class="img-fluid" src="{{item.product.imageURL}}" alt="" />
+								</a>
+                                    </td>
+                                    <td class="name-pr">
+                                        <a href="#">
+									{{item.product.name}}
+								</a>
+                                    </td>
+                                    <td class="price-pr">
+                                        <p>$ {{item.product.price}}</p>
+                                    </td>
+                                    <td class="quantity-box"><p>{{item.quantity}}</p></td>
+                                    <td class="total-pr">
+                                        <p>$ {{item.item_price}}</p>
+                                    </td>
+                                    
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                    <hr>
+                    <hr>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock content %}

@@ -1,0 +1,95 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+    <!-- Start About Page  -->
+    <div class="about-box-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2 class="noo-sh-title">We are <span>CSE students at PDEU</span></h2>
+                    <p>For this project, we designed and implemen a database management system for an ecommerce website using Django as the backend framework and MySQL as the database management system. The goal of the project is to create a fully functional online store where users can browse and purchase products, manage their shopping cart, and view their order history.</p>
+                    <p>The languages we used are Django framework, HTML, CSS, JavaScript, MySQL. We have written the back-end by ourself but used templates of front-end</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="banner-frame"> <img class="img-thumbnail img-fluid" src="{% static 'images/9.jpg' %}" alt="" />
+                    </div>
+                </div>
+            </div>
+            <div style="margin-left: 200px;" class="row my-4">
+                <div class="col-12">
+                    <h2 class="noo-sh-title">Meet Our Team</h2>
+                </div>
+                <div class="col-sm-6 col-lg-3 ">
+                    <div class="hover-team">
+                        <div class="our-team"> <img src="{% static 'images/ketan.jpeg' %}" alt="" />
+                            <div class="team-content">
+                                <h3 class="title">Ketan</h3> <span class="post">Web Developer</span> </div>
+                            <ul class="social">
+                                <li>
+                                    <a href="#" class="fab fa-facebook"></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="fab fa-twitter"></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com/ketallyours___/" class="fab fa-instagram"></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="fab fa-youtube"></a>
+                                </li>
+                            </ul>
+                            <div class="icon"> <i class="fa fa-plus" aria-hidden="true"></i> </div>
+                        </div>
+                        <hr class="my-0"> </div>
+                </div>
+                <div style="height: 100%;" class="col-sm-6 col-lg-3">
+                    <div style="height: 100%;" class="hover-team">
+                        <div style="height: 100%;" class="our-team"> <img style="height: 300px;" src="{% static 'images/biniyam.jpg' %}" alt="" />
+                            <div class="team-content">
+                                <h3 class="title">Biniyam Daniel</h3> <span class="post">Back-end Developer</span> </div>
+                            <ul class="social">
+                                <li>
+                                    <a href="#" class="fab fa-facebook"></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="fab fa-twitter"></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com/bini_dn/" class="fab fa-instagram"></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="fab fa-youtube"></a>
+                                </li>
+                            </ul>
+                            <div class="icon"> <i class="fa fa-plus" aria-hidden="true"></i> </div>
+                        </div>
+                        <hr class="my-0"> </div>
+                </div>
+                <div class="col-sm-6 col-lg-3" >
+                    <div class="hover-team">
+                        <div class="our-team"> <img style="height: 300px;" src="{% static 'images/kelvin.jpeg' %}" alt="" />
+                            <div class="team-content">
+                                <h3 class="title">Kelvin</h3> <span class="post">Web Developer</span> </div>
+                            <ul class="social">
+                                <li>
+                                    <a href="#" class="fab fa-facebook"></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="fab fa-twitter"></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com/_kevoo17/" class="fab fa-instagram"></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="fab fa-youtube"></a>
+                                </li>
+                            </ul>
+                            <div class="icon"> <i class="fa fa-plus" aria-hidden="true"></i> </div>
+                        </div>
+                        <hr class="my-0"> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End About Page -->
+{% endblock %}

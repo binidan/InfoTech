@@ -18,7 +18,9 @@ class Customer(AbstractUser):
     REQUIRED_FIELDS = ['username']
 
     def __str__(self):
-        self.first_name
+        if self.first_name==None:
+            return "ERROR-CUSTOMER NAME IS NULL"
+        return self.first_name
 
 
 class Address(models.Model):
@@ -100,13 +102,21 @@ class Order(models.Model):
 
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
     address = models.ForeignKey(Address, on_delete=models.SET_NULL, null=True)
-    id = models.CharField(max_length=36, primary_key=True, default=get_default_id, editable=False)
+    id = models.CharField(max_length=45, primary_key=True, default=get_default_id, editable=False)
     date = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False)
     delivered = models.BooleanField(default=False)
 
     def __str__(self):
+        if self.id==None:
+            return "ERROR-CUSTOMER NAME IS NULL"
         return self.id
+    
+    @property
+    def order_discount(self):
+        orderitems = self.item_set.all()
+        total = sum((item.product.discount)*(item.quantity) for item in orderitems)
+        return total
     
     @property
     def order_price(self):
@@ -134,5 +144,5 @@ class Item(models.Model):
 
     @property
     def item_price(self):
-        total = self.food.price * self.quantity
+        total = self.product.price * self.quantity
         return total   

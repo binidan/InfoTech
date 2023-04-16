@@ -31,13 +31,13 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="right-phone-box">
-                        <p>Call US :- <a href="#"> +91 780 182 5084</a></p>
+                        <p>Call:- <a href="#"> +91 780 182 5084</a></p>
                     </div>
                     <div class="our-link">
                         <ul>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Our location</a></li>
-                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Source Code</a></li>
+                            <li><a style="text-transform: lowercase;" href="https://github.com/binidan/InfoTech">github.com/binidan/InfoTech</a></li>
+                            <!-- <li><a href="#">Contact Us</a></li> -->
                         </ul>
                     </div>
                 </div>
@@ -50,21 +50,21 @@
     <header class="main-header">
         <!-- Start Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
-            <div class="container">
+            <div  class="container">
                 <!-- Start Header Navigation -->
                 <div class="navbar-header">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand" href="index.html"><img style="width:40%" src="{% static 'images/logo2.png' %}" class="logo" alt=""></a>
+                    <a class="navbar-brand" href="{% url 'home' %}"><img style="width:40%" src="{% static 'images/logo2.png' %}" class="logo" alt=""></a>
                 </div>
                 <!-- End Header Navigation -->
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="navbar-menu">
+                <div style="margin-left: -70px;" class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">Shop</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'shop' %}">Shop</a></li>
                         <li class="dropdown megamenu-fw">
                             <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Categories</a>
                             <ul class="dropdown-menu megamenu-content" role="menu">
@@ -87,29 +87,39 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About Us</a></li>
+                        {% if request.user.is_authenticated %}
                         <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Account</a>
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Hello {{request.user.first_name}}</a>
                             <ul class="dropdown-menu">
-                                <li><a href="cart.html">Cart</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
-                                <li><a href="my-account.html">My Account</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
-                                <li><a href="shop-detail.html">Shop Detail</a></li>
+                                <li><a href="{% url 'cart' %}">Cart</a></li>
+                                <li><a href="{% url 'checkout' %}">Checkout</a></li>
+                                <li><a href="{% url 'orders' %}">My Orders</a></li>
+                                <!-- <li><a href="wishlist.html">Wishlist</a></li> -->
+                                <li><a href="{% url 'logout' %}">Log Out</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="contact-us.html">About Us</a></li>
+                        {% endif %}
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
 
                 <!-- Start Atribute Navigation -->
-                <div class="attr-nav">
+                <div style="margin-left: 20px;" class="attr-nav">
+                    
                     <ul>
+                        
                         <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                        <li class="side-menu"><a href="#">
-						<i class="fa fa-shopping-bag"></i>
-                            <span class="badge">3</span>
-					</a></li>
+                        {% if request.user.is_authenticated %}
+                        <li class="">
+                            <a href="{% url 'cart' %}">
+						        <i class="fa fa-shopping-bag"></i>
+                                <span id="order-count" class="badge">{{order_f.order_total_items}}</span>
+					        </a>
+                        </li>
+                        {%else%}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Sign In</a></li>
+                        {% endif %}
                     </ul>
                 </div>
                 <!-- End Atribute Navigation -->
@@ -122,7 +132,7 @@
     <!-- Start Top Search -->
     <div class="top-search">
         <div class="container">
-            <form method="GET" action="">
+            <form method="GET" action="{% url 'shop' %}">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
                 <input name="q" type="text" class="form-control" placeholder="Search">

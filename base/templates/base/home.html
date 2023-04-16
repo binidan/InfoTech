@@ -2,6 +2,16 @@
     {% load static %}
     {% block content %}
     <!-- Start Slider -->
+                {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'success'%}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                            <p>Check Orders <a href="{% url 'orders' %}">here</a></p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
     <div id="slides-shop" class="cover-slides">
         <ul class="slides-container">
             <li class="text-left">
@@ -11,7 +21,7 @@
                         <div class="col-md-12">
                             <h1 class="m-b-20"><strong>Welcome To <br> InfiTech</strong></h1>
                             <p class="m-b-40">This is our DataBase Management System Group Project <br></p>
-                            <p><a class="btn hvr-hover" href="#">Shop Now</a></p>
+                            <p><a class="btn hvr-hover" href="#product-list">Shop Now</a></p>
                         </div>
                     </div>
                 </div>
@@ -23,7 +33,7 @@
                         <div class="col-md-12">
                             <h1 class="m-b-20"><strong>Welcome To <br> InfiTech</strong></h1>
                             <p class="m-b-40">This is our DataBase Management System Group Project <br></p>
-                            <p><a class="btn hvr-hover" href="#">Shop New</a></p>
+                            <p><a class="btn hvr-hover" href="#product-list">Shop New</a></p>
                         </div>
                     </div>
                 </div>
@@ -35,7 +45,7 @@
                         <div class="col-md-12">
                             <h1 class="m-b-20"><strong>Welcome To <br> InfiTech</strong></h1>
                             <p class="m-b-40">This is our DataBase Management System Group Project <br></p>
-                            <p><a class="btn hvr-hover" href="#">Shop New</a></p>
+                            <p><a class="btn hvr-hover" href="#product-list">Shop New</a></p>
                         </div>
                     </div>
                 </div>
@@ -57,7 +67,7 @@
                     <div  class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div style="height:400px" class="shop-cat-box">
                             <img style="width:100%; height: 100%;" class="img-fluid" src="{{category.product_set.first.imageURL}}" alt="" />
-                            <a class="btn hvr-hover" href="#">{{category.title}}</a>
+                            <a class="btn hvr-hover" href="{% url 'shop' %}?q={{category.title}}">{{category.title}}</a>
                         </div>
                     </div>
                     {% endif %}
@@ -69,7 +79,7 @@
     <!-- End Categories -->
 
     <!-- Start Products  -->
-    <div class="products-box">
+    <div id="product-list" class="products-box">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -98,23 +108,21 @@
                 {% for product in category.product_set.all %}
                 <div class="col-lg-3 col-md-6 special-grid {{category.parent.slug}}">
                     <div class="products-single fix">
-                        <div style="height: 400px;" class="box-img-hover">
+                        <div style="height: 300px;" class="box-img-hover">
 
                             <img style="height:100%; width: 100%;" src="{{product.imageURL}}" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                    
+                                    <li><a href="{% url 'product' product.id %}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                                 </ul>
-                                <a class="cart" href="#">Add to Cart</a>
+                                <a data-product="{{product.id}}" data-action="add" class="cart update-cart" href="{% url 'cart' %}">Add to Cart</a>
                             </div>
                         </div>
-                        <div class="why-text">
-                            <h3><strong>{{product.name}}</strong></h3>
-                            <div class="flex">
-                                <h5 style="color: brown;"> ${{product.price}}</h5>
-                                <h6> <del>${{product.total_cost}}</del></h6>
-                            </div>
+                        <div class="why-text full-width">
+                            <h4>{{product.name}}</h4>
+                            <h5> <del>${{product.total_cost}}</del> ${{product.price}}</h5>                         
                         </div>
                     </div>
                 </div>
@@ -133,9 +141,9 @@
             {% for product in category.product_set.all %}
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="{{product.imageURL}}" alt="" />
+                    <img style="height: 250px;" src="{{product.imageURL}}" alt="" />
                     <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/bini_dn/"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
