@@ -73,6 +73,14 @@ class Product(models.Model):
     description = models.TextField(null=True, blank=True)
     in_stock = models.BooleanField(default=True)
     image = models.ImageField(null=True, blank=True)
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
     
     def __str__(self):
         return self.name
@@ -90,11 +98,6 @@ class Product(models.Model):
             url = ''
         return url
     
-    @property
-    def shortDesc(self):
-        desc = self.description[:35]
-        return desc  
-
 
 class Order(models.Model):
     def get_default_id():

@@ -91,6 +91,17 @@ WSGI_APPLICATION = 'InfiTech.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'infitech$default',
+#         'USER': 'infitech',
+#         'PASSWORD': '',
+#         'HOST': 'infitech.mysql.pythonanywhere-services.com',
+#         'PORT': '3306'
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
